@@ -51,10 +51,11 @@ class App extends Component {
 
     for (var i = 0; i < winCombos.length; i++) {
       let moves = winCombos[i].map((position) => {
-        return cells[position].textContent
+        return cells[position]
       })
 
       if (moves.every((move) => {
+        console.log(move, player)
         return move === player
       })) {
         this.gameOver()
@@ -64,7 +65,8 @@ class App extends Component {
 
 // ENDS THE GAME IF A WINNING COMBO IS MADE
   gameOver () {
-    this.console.log('player won')
+    console.log('player won')
+    this.setState({playerWon: true})
   // Adds the Highlight colors to the winning combo
   // After 3 wins by either player displays a modal to reset
   // Timeout 2 seconds and clears and calls gameReset
@@ -80,6 +82,14 @@ class App extends Component {
   }
     // Resets the game to its initial state
   // }
+
+  playSound () {
+    if (gameOver === true && !this.state.playSound) {
+      this.setState({
+        playSound: true
+      })
+    }
+  }
 
   render () {
     return <div>

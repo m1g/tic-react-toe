@@ -82,9 +82,15 @@ footer {
   color: grey;
 }
 
-table.victory {
+table.win {
   td {
     color: #bada55;
+  }
+}
+
+table.lose {
+  td {
+    color: #a41123;
   }
 }
 
