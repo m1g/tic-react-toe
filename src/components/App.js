@@ -61,6 +61,8 @@ class App extends Component {
         return move === player
       })) {
         this.gameOver(player)
+        this.setState({ won: true })
+        return true
       }
     }
   }
@@ -68,9 +70,15 @@ class App extends Component {
 // ENDS THE GAME IF A WINNING COMBO IS MADE
   gameOver (player) {
     console.log('player won')
-    this.setState({whoWon: player})
   // Adds the Highlight colors to the winning combo
+    if (player === 'X') {
+      return this.setState({whoWon: player})
+    } else {
+      return this.setState({cpuWon: player})
+    }
   // After 3 wins by either player displays a modal to reset
+  // qs('body').className = 'modal'
+
   // Timeout 2 seconds and clears and calls gameReset
   }
 
@@ -93,6 +101,16 @@ class App extends Component {
     }
   }
 
+  getClassForCell (position) {
+    if (this.state.won) {
+      if (this.state.currentPlayer === this.state.cells[position]) {
+        return 'win'
+      } else {
+        return 'lose'
+      }
+    }
+  }
+
   render () {
     return <div>
       <header>
@@ -102,19 +120,19 @@ class App extends Component {
         <table>
           <tbody>
             <tr>
-              <td className={this.state.cells[0] === this.state.whoWon ? 'win' : ''} onClick={() => { this.playerMove(0) }}>{this.state.cells[0]}</td>
-              <td className={this.state.cells[1] === this.state.whoWon ? 'win lr-border' : 'lr-border'} onClick={() => { this.playerMove(1) }}>{this.state.cells[1]}</td>
-              <td className={this.state.cells[2] === this.state.whoWon ? 'win' : ''} onClick={() => { this.playerMove(2) }}>{this.state.cells[2]}</td>
+              <td className={this.getClassForCell(0)} onClick={() => { this.playerMove(0) }}>{this.state.cells[0]}</td>
+              <td className={this.getClassForCell(1) + ' lr-border'} onClick={() => { this.playerMove(1) }}>{this.state.cells[1]}</td>
+              <td className={this.getClassForCell(2)} onClick={() => { this.playerMove(2) }}>{this.state.cells[2]}</td>
             </tr>
             <tr>
-              <td className={this.state.cells[3] === this.state.whoWon ? 'win tb-border' : 'tb-border'} onClick={() => { this.playerMove(3) }}>{this.state.cells[3]}</td>
-              <td className={this.state.cells[4] === this.state.whoWon ? 'win tb-border lr-border' : 'tb-border lr-border'} onClick={() => { this.playerMove(4) }}>{this.state.cells[4]}</td>
-              <td className={this.state.cells[5] === this.state.whoWon ? 'win tb-border' : 'tb-border'} onClick={() => { this.playerMove(5) }}>{this.state.cells[5]}</td>
+              <td className={this.getClassForCell(3) + ' tb-border'} onClick={() => { this.playerMove(3) }}>{this.state.cells[3]}</td>
+              <td className={this.getClassForCell(4) + ' tb-border lr-border'} onClick={() => { this.playerMove(4) }}>{this.state.cells[4]}</td>
+              <td className={this.getClassForCell(5) + ' tb-border'} onClick={() => { this.playerMove(5) }}>{this.state.cells[5]}</td>
             </tr>
             <tr>
-              <td className={this.state.cells[6] === this.state.whoWon ? 'win' : ''} onClick={() => { this.playerMove(6) }}>{this.state.cells[6]}</td>
-              <td className={this.state.cells[7] === this.state.whoWon ? 'win lr-border' : 'lr-border'} onClick={() => { this.playerMove(7) }}>{this.state.cells[7]}</td>
-              <td className={this.state.cells[8] === this.state.whoWon ? 'win' : ''} onClick={() => { this.playerMove(8) }}>{this.state.cells[8]}</td>
+              <td className={this.getClassForCell(6)} onClick={() => { this.playerMove(6) }}>{this.state.cells[6]}</td>
+              <td className={this.getClassForCell(7) + ' lr-border'} onClick={() => { this.playerMove(7) }}>{this.state.cells[7]}</td>
+              <td className={this.getClassForCell(8)} onClick={() => { this.playerMove(8) }}>{this.state.cells[8]}</td>
             </tr>
           </tbody>
         </table>
