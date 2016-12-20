@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import CellItem from './CellItem.js'
+// import CellItem from './CellItem.js'
 
 class App extends Component {
 
@@ -13,7 +13,11 @@ class App extends Component {
         '', '', '',
         '', '', ''
       ],
-      won: false
+      won: false,
+      wins: {
+        X: 0,
+        O: 0
+      }
     }
   }
 
@@ -60,46 +64,41 @@ class App extends Component {
       if (moves.every((move) => {
         return move === player
       })) {
-        this.gameOver(player)
-        this.setState({ won: true })
+        // this.gameOver(player)
+
+        // Essentially copy the existing state
+        const wins = {
+          X: this.state.wins.X,
+          O: this.state.wins.O
+        }
+        wins[player] = wins[player] + 1
+
+        this.setState({ won: true, wins: wins })
+        setTimeout(() => { this.gameReset() }, 2000)
         return true
       }
     }
   }
 
-// ENDS THE GAME IF A WINNING COMBO IS MADE
-  gameOver (player) {
-    console.log('player won')
-  // Adds the Highlight colors to the winning combo
-    if (player === 'X') {
-      return this.setState({whoWon: player})
-    } else {
-      return this.setState({cpuWon: player})
-    }
-  // After 3 wins by either player displays a modal to reset
-  // qs('body').className = 'modal'
-
-  // Timeout 2 seconds and clears and calls gameReset
-  }
-
 // RESETS THE GAME
-  gameReset (position) {
-    if (gameOver) {
-      const newCells = this.state.cells.slice()
-      newCells[position] = this.state.currentPlayer
-      this.setState({ cells: newCells })
-    }
+  gameReset () {
+    this.setState({
+      cells: [
+        '', '', '',
+        '', '', '',
+        '', '', ''
+      ],
+      won: false
+    })
   }
-    // Resets the game to its initial state
-  // }
 
-  playSound () {
-    if (gameOver === true && !this.state.playSound) {
-      this.setState({
-        playSound: true
-      })
-    }
-  }
+  // playSound () {
+  //   if (gameOver === true && !this.state.playSound) {
+  //     this.setState({
+  //       playSound: true
+  //     })
+  //   }
+  // }
 
   getClassForCell (position) {
     if (this.state.won) {
