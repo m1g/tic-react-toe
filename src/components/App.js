@@ -112,10 +112,10 @@ class App extends Component {
 
   render () {
     return <div>
-      <header>
-        <h1>Tic React Toe</h1>
-      </header>
       <section>
+        <header>
+          <h1>Tic React Toe</h1>
+        </header>
         <table>
           <tbody>
             <tr>

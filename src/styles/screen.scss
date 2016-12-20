@@ -7,120 +7,120 @@ $highlight-color: #bada55;
 
 html {
   text-size-adjust: 100%;
-  height: 100%;
+  height: 100vh;
 }
 
 body {
   @include font-smoothing(on);
 
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
   margin: 0;
   font: $base-text-size / 1 $base-font-family;
-  min-height: 100%;
   border-top: 5px solid $highlight-color;
 }
 
-header {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: $base-font-family;
-  font-size: 1.5em;
-
-  h1 {
-    text-align: center;
-    margin: 20px;
-  }
+body,
+#root,
+section {
+  min-height: 100vh;
 }
 
 section {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-}
-
-table {
-  text-align: center;
-  padding: 60px 0;
-  border-spacing: 0;
-}
-
-.modal {
-  filter: blur(20px);
-  transition: filter 50ms ease;
-
-  h3 {
-    font-size: 2em;
-    margin: 1em;
-  }
-}
-
-body:not(.modal) .overlay {
-  display: none;
-  filter: blur(0);
-}
-
-.overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  display: flex;
-  justify-content: center;
   align-items: center;
-  background-color: rgba(0, 0, 0, 0.33);
-}
+  justify-content: space-between;
 
-footer {
-  text-align: center;
-  font-family: sans-serif;
-  font-size: 0.75em;
-  color: grey;
-}
+  header {
+    font-family: $base-font-family;
+    padding: 2em;
 
-table {
-  td.win {
-    color: #bada55;
-  }
-}
-
-table {
-  td.lose {
-    color: #a41123;
-  }
-}
-
-td {
-  width: 160px;
-  height: 160px;
-  cursor: pointer;
-  font-size: 7em;
-
-  &.tb-border {
-    border-top: 10px solid black;
-    border-bottom: 10px solid black;
+    h1 {
+      margin: 0;
+      font-size: 3em;
+      text-align: center;
+    }
   }
 
-  &.lr-border {
-    border-left: 10px solid black;
-    border-right: 10px solid black;
+  table {
+    text-align: center;
+    border-spacing: 0;
   }
 
-  &.o {
-    background-image: url('http://i.imgur.com/9mXT0YV.png');
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
+  .modal {
+    filter: blur(20px);
+    transition: filter 50ms ease;
+
+    h3 {
+      font-size: 2em;
+      margin: 1em;
+    }
   }
 
-  &.x {
-    background-image: url('http://i.imgur.com/7BA6OUq.png');
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
+  body:not(.modal) .overlay {
+    display: none;
+    filter: blur(0);
+  }
+
+  .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.33);
+  }
+
+  table {
+    td.win {
+      color: #bada55;
+    }
+  }
+
+  table {
+    td.lose {
+      color: #a41123;
+    }
+  }
+
+  td {
+    width: 160px;
+    height: 160px;
+    cursor: pointer;
+    font-size: 7em;
+
+    &.tb-border {
+      border-top: 10px solid black;
+      border-bottom: 10px solid black;
+    }
+
+    &.lr-border {
+      border-left: 10px solid black;
+      border-right: 10px solid black;
+    }
+
+    &.o {
+      background-image: url('http://i.imgur.com/9mXT0YV.png');
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+
+    &.x {
+      background-image: url('http://i.imgur.com/7BA6OUq.png');
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+  }
+
+  footer {
+    padding: 2em;
+    text-align: center;
+    font-family: sans-serif;
+    font-size: 0.75em;
+    color: grey;
   }
 }
