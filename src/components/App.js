@@ -7,6 +7,7 @@ class App extends Component {
   constructor () {
     super()
     this.state = {
+      counter: 0,
       currentPlayer: 'X',
       cells: [
         '', '', '',
@@ -14,6 +15,7 @@ class App extends Component {
         '', '', ''
       ],
       won: false,
+      draw: false,
       wins: {
         X: 0,
         O: 0
@@ -23,9 +25,8 @@ class App extends Component {
 
 // SELECTS A BOX
   playerMove (position) {
-    if (this.state.whoWon) {
-      return
-    }
+    if (this.state.won || this.state.draw) { return }
+
     // If the cell hasn't already been played:
     if (this.state.cells[position] === '') {
       // Make a copy of the existing state // Why?
@@ -41,6 +42,18 @@ class App extends Component {
         }
       }
     }
+    // If there's a draw
+    this.setState({
+      counter: this.state.counter + 1
+    }, () => {
+      if (this.state.counter === 9) {
+        setTimeout(() => { this.gameReset() }, 2000)
+        console.log('ITS A DRAW', this.state.counter)
+        this.setState({
+          draw: true
+        })
+      }
+    })
   }
 
 // CHECKS TO SEE IF THE BOX IS A WINNER
@@ -88,7 +101,9 @@ class App extends Component {
         '', '', '',
         '', '', ''
       ],
-      won: false
+      won: false,
+      counter: 0,
+      draw: false
     })
   }
 
@@ -107,6 +122,8 @@ class App extends Component {
       } else {
         return 'lose'
       }
+    } else if (this.state.draw) {
+      return 'draw'
     }
   }
 
@@ -137,7 +154,7 @@ class App extends Component {
         </table>
         <footer>
           <p>
-            &copy; 2016 Miguel Malcolm.
+            &copy; 2016 Miguel Malcolm. Made with &hearts; at The Iron Yard
           </p>
         </footer>
       </section>
